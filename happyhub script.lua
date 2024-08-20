@@ -2504,7 +2504,7 @@ end)
 ---
 
 local OrionLib = loadstring(game:HttpGet(('https://raw.githubusercontent.com/shlexware/Orion/main/source')))()
-local Window = OrionLib:MakeWindow({Name = "Banana hub By bao Hub", HidePremium = false, IntroText = "MinGaming Library", SaveConfig = true, ConfigFolder = "Banana hub By bao Hub"})
+local Window = OrionLib:MakeWindow({Name = "happy hub", HidePremium = false, IntroText = "helu ", SaveConfig = true, ConfigFolder = "happy hub"})
 ----------Tab-----------------------
 local W = Window:MakeTab({
     Name = "Thông Tin",
@@ -3458,7 +3458,7 @@ y = debug.getupvalues(CombatFrameworkR)[2]
 local function UpdateAttackSettings()
     pcall(function()
         CameraShaker:Stop()
-        y.activeController.timeToNextAttack = 0
+        y.activeController.timeToNextAttack = 1
         y.activeController.hitboxMagnitude = 60
         y.activeController.active = false
         y.activeController.timeToNextBlock = 0
@@ -3478,10 +3478,10 @@ spawn(function()
                 UpdateAttackSettings()
             end
         end
-        wait(5)  -- Chờ 5 giây trước khi tạm dừng
+        wait(2)  -- Chờ 5 giây trước khi tạm dừng
         if _G.FastAttack then
             -- Thực hiện dừng trong 1 giây
-            wait(1)
+            wait(0.2)
         end
     end
 end)
@@ -3493,11 +3493,11 @@ spawn(function()
             game.Players.LocalPlayer.Character.Stun.Value = 0
             game.Players.LocalPlayer.Character.Busy.Value = false        
         end
-        wait(1)  -- Chờ 1 giây trước khi kiểm tra lại
+        wait(0.2)  -- Chờ 1 giây trước khi kiểm tra lại
     end
 end)
 
-_G.FastAttackDelay = 0.2
+_G.FastAttackDelay = 0.0
 
            
 local Section = M:AddSection({
@@ -4551,28 +4551,23 @@ IQ:AddToggle({
         
         game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer(unpack(args))
         
-        function two(gotoCFrame) --- Tween
-              pcall(function()
-                  game.Players.LocalPlayer.Character.Humanoid.Sit = false
-                  game.Players.LocalPlayer.Character.HumanoidRootPart.Anchored = false
-              end)
-              if (game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude <= 200 then
-                  pcall(function() 
-                      tweenz:Cancel()
-                  end)
-                  game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.CFrame = gotoCFrame
-              else
-                  local tween_s = game:service"TweenService"
-                  local info = TweenInfo.new((game:GetService("Players")["LocalPlayer"].Character.HumanoidRootPart.Position - gotoCFrame.Position).Magnitude/325, Enum.EasingStyle.Linear)
-                   tween, err = pcall(function()
-                      tweenz = tween_s:Create(game.Players.LocalPlayer.Character["HumanoidRootPart"], info, {CFrame = gotoCFrame})
-                      tweenz:Play()
-                  end)
-                  if not tween then return err end
-              end
-              function _TweenCanCle()
-                  tweenz:Cancel()
-              end
+        function Tween2(P1)
+            local Distance = (P1.Position - game.Players.LocalPlayer.Character.HumanoidRootPart.Position).Magnitude
+            if Distance >= 1 then
+            Speed = 300
+            end
+            game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+              CFrame = P1
+            }):Play()
+            if _G.CancelTween2 then
+            game:GetService("TweenService"):Create(game.Players.LocalPlayer.Character.HumanoidRootPart,TweenInfo.new(Distance/Speed, Enum.EasingStyle.Linear), {
+              CFrame = P1
+            }):Cancel()
+            end
+            _G.Clip2 = true
+            wait(Distance/Speed)
+            _G.Clip2 = false
+            end
           
         end
         two(CFrame.new(-5100.7085, 29.968586, -6792.45459, -0.33648631, -0.0396691673, 0.940852463, -6.40461678e-07, 0.999112308, 0.0421253517, -0.941688359, 0.0141740013, -0.336187631))
@@ -8569,13 +8564,13 @@ pcall(function()
         if _G.AutoEliteHunter then
             if game:GetService("Players").LocalPlayer.PlayerGui.Main.Quest.Visible == true then
                 OrionLib:MakeNotification({
-                    Name = "Banana hub By bao Hub(Noitification)",
+                    Name = "happy hub(Noitification)",
                     Content = "[EN] : Please cancel the farrm level quest (if any)",
                     Image = "rbxassetid://4483345998",
                     Time = 9
                 })
                 OrionLib:MakeNotification({
-                    Name = "Banana hub By bao Hub(Noitification)",
+                    Name = "happy hub (Noitification)",
                     Content = "[VN] : Làm ơn hủy nhiệm vụ farrm level(nếu có)",
                     Image = "rbxassetid://4483345998",
                     Time = 9
@@ -8744,7 +8739,7 @@ spawn(function()
             if _G.AutoObservation then
                 if game:GetService("Players").LocalPlayer.VisionRadius.Value >= 3000 then
                     OrionLib:MakeNotification({
-                        Name = "Banana hub By bao Hub BOT",
+                        Name = "happy hub BOT",
                         Content = "!!You Are Max Point!!",
                         Image = "rbxassetid://14919714384",
                         Time = 5
@@ -8893,7 +8888,7 @@ spawn(function()
         if Mybeli <= 2500000 or MyFragment <= 5000 then
             wait(2.0)
             OrionLib:MakeNotification({
-                Name = "Banana hub By bao Hub",
+                Name = "happy hub",
                 Content = "You not have beli or fragment!",
                 Image = "rbxassetid://4483345998",
                 Time = 5
@@ -9054,7 +9049,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Banana hub By bao Hub BOT",
+                            Name = "happy hub BOT",
                             Content = "Not Have Superhuman",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -9067,7 +9062,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Banana hub By bao Hub BOT",
+                            Name = "happy hub",
                             Content = "Not Have Death Step",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -9080,7 +9075,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Banana hub By bao Hub BOT",
+                            Name = "happy hub BOT",
                             Content = "Not Have SharkMan Karate",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -9093,7 +9088,7 @@ spawn(function()
                         end
                     else
                         gOrionLib:MakeNotification({
-                            Name = "Banana hub By bao Hub BOT",
+                            Name = "happy hub BOT",
                             Content = "Not Have Electric Claw",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -9104,7 +9099,7 @@ spawn(function()
                         if game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Backpack:FindFirstChild("Dragon Talon").Level.Value >= 400 or game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon") and game.Players.LocalPlayer.Character:FindFirstChild("Dragon Talon").Level.Value >= 400 then
                             if string.find(game:GetService("ReplicatedStorage").Remotes.CommF_:InvokeServer("BuyGodhuman",true), "Bring") then
                                 OrionLib:MakeNotification({
-                                    Name = "Banana hub By bao Hub BOT",
+                                    Name = "happy hub BOT",
                                     Content = "Not Have Enough Material",
                                     Image = "rbxassetid://14919714384",
                                     Time = 5
@@ -9116,7 +9111,7 @@ spawn(function()
                         end
                     else
                         OrionLib:MakeNotification({
-                            Name = "Banana hub By bao Hub BOT",
+                            Name = "happy hub BOT",
                             Content = "You Not Have Dragon Talon! ",
                             Image = "rbxassetid://14919714384",
                             Time = 5
@@ -11515,7 +11510,7 @@ spawn(function()
             if game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149052" or game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149431" then
                 wait(2.0)
                 OrionLib:MakeNotification({
-                    Name = "Banana hub By bao Hub",
+                    Name = "happy hub",
                     Content = "Turn Off Hop Find Moon Please",
                     Image = "rbxassetid://4483345998",
                     Time = 5
@@ -11523,7 +11518,7 @@ spawn(function()
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709143733" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Banana hub By bao Hub",
+                    Name = "happy hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://4483345998",
                     Time = 5
@@ -11531,7 +11526,7 @@ spawn(function()
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709150401" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Banana hub By bao Hub",
+                    Name = "happy hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://4483345998",
                     Time = 5
@@ -11539,7 +11534,7 @@ spawn(function()
             elseif game:GetService("Lighting").Sky.MoonTextureId=="http://www.roblox.com/asset/?id=9709149680" then
                 Hop()
                 OrionLib:MakeNotification({
-                    Name = "Banana hub By bao Hub",
+                    Name = "happy hub",
                     Content = "Hop Server",
                     Image = "rbxassetid://4483345998",
                     Time = 5
